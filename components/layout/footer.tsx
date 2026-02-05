@@ -7,6 +7,7 @@
 
 import { siteConfig } from "@/config/site.config";
 import { FadeIn } from "@/components/motion/fade-in";
+import { WhatsAppIcon } from "@/lib/utils/whatsapp-icon";
 
 export function Footer() {
   return (
@@ -36,9 +37,10 @@ export function Footer() {
                 href={siteConfig.contact.whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-2 rounded-lg bg-gradient-to-r from-green-500 to-green-600 px-4 py-2 text-sm font-medium text-white shadow-lg shadow-green-500/25 transition-all hover:scale-105 hover:shadow-xl hover:shadow-green-500/40 dark:from-green-600 dark:to-green-700"
+                className="group flex items-center gap-2 rounded-xl bg-[#25D366] px-4 py-2.5 text-sm font-medium text-white shadow-md shadow-[#25D366]/30 transition-all hover:scale-[1.02] hover:shadow-lg hover:shadow-[#25D366]/40 active:scale-[0.98]"
+                aria-label="تماس با ما از طریق واتساپ"
               >
-                <span>📲</span>
+                <WhatsAppIcon size={20} className="flex-shrink-0" />
                 <span>تماس با ما</span>
               </a>
             </div>

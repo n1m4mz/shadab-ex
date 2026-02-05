@@ -25,49 +25,10 @@ export async function GET(request: Request) {
     const messageText = await fetchTelegramChannelMessage();
 
     if (!messageText) {
-      // Return mock data for development/testing
-      // In production, this should return an error or cached data
-      return NextResponse.json({
-        date: {
-          persian: "یکشنبه 12 دلو ۱۴۰۴",
-          gregorian: "01 February 2026",
-        },
-        rates: [
-          {
-            id: "rate-1",
-            currency: "افغانی",
-            currencyCode: "AFN",
-            flag: "🇦🇫",
-            rate: 75.5,
-            formattedRate: "75.50",
-          },
-          {
-            id: "rate-2",
-            currency: "دالر",
-            currencyCode: "USD",
-            flag: "🇺🇸",
-            rate: 1.149,
-            formattedRate: "1.1490",
-          },
-          {
-            id: "rate-3",
-            currency: "تومان",
-            currencyCode: "IRR",
-            flag: "🇮🇷",
-            rate: 179000,
-            formattedRate: "179,000",
-          },
-          {
-            id: "rate-4",
-            currency: "لیر ترکیه",
-            currencyCode: "TRY",
-            flag: "🇹🇷",
-            rate: 50.8,
-            formattedRate: "50.80",
-          },
-        ],
-        lastUpdated: new Date().toISOString(),
-      }, { headers });
+      return NextResponse.json(
+        { error: "Failed to fetch exchange rates from Telegram" },
+        { status: 503, headers }
+      );
     }
 
     // Parse the message

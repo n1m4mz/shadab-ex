@@ -5,6 +5,7 @@
 
 "use client";
 
+import Image from "next/image";
 import { FadeIn } from "@/components/motion/fade-in";
 import { SlideUp } from "@/components/motion/slide-up";
 import { Card, CardContent } from "@/components/ui/card";
@@ -15,18 +16,21 @@ const testimonials = [
     role: "کارآفرین",
     content: "خدمات عالی و سریع! نرخ‌های به‌روز و خدمات حرفه‌ای. حواله من در کمتر از 24 ساعت انجام شد.",
     rating: 5,
+    image: "/user-1.jpg",
   },
   {
     name: "فاطمه احمدی",
     role: "دانشجو",
     content: "بهترین صرافی که تا حالا کار کردم. پشتیبانی عالی و نرخ‌های رقابتی. حتماً دوباره استفاده می‌کنم.",
     rating: 5,
+    image: "/user-2.jpg",
   },
   {
     name: "علی رضایی",
     role: "تاجر",
     content: "برای کسب و کارم نیاز به تبدیل ارز دارم و این صرافی همیشه بهترین نرخ‌ها رو ارائه می‌ده. بسیار راضی هستم.",
     rating: 5,
+    image: "/user-3.jpg",
   },
 ];
 
@@ -72,8 +76,14 @@ export function TestimonialsSection() {
                     </p>
                   </div>
                   <div className="flex items-center gap-4 border-t border-gray-200/50 pt-6 dark:border-gray-800/50">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-purple-500 text-lg font-bold text-white">
-                      {testimonial.name.charAt(0)}
+                    <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-full ring-2 ring-gray-200/50 dark:ring-gray-700/50">
+                      <Image
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        fill
+                        className="object-cover"
+                        sizes="48px"
+                      />
                     </div>
                     <div>
                       <p className="font-semibold text-gray-900 dark:text-gray-100">

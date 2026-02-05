@@ -8,6 +8,7 @@
 import { useExchangeRates } from "@/hooks/use-exchange-rates";
 import { ExchangeRatesList } from "./exchange-rates-list";
 import { ExchangeRatesLoading } from "./exchange-rates-loading";
+import { WhatsAppIcon } from "@/lib/utils/whatsapp-icon";
 import { FadeIn } from "@/components/motion/fade-in";
 import { SlideUp } from "@/components/motion/slide-up";
 import { Card, CardContent } from "@/components/ui/card";
@@ -98,11 +99,12 @@ export function ExchangeRatesSection() {
                       href={siteConfig.contact.whatsappLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group inline-flex items-center gap-3 rounded-xl bg-gradient-to-r from-green-500 to-green-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-green-500/25 transition-all hover:scale-105 hover:shadow-xl hover:shadow-green-500/40 dark:from-green-600 dark:to-green-700"
+                      className="group inline-flex items-center gap-3 rounded-xl bg-[#25D366] px-8 py-4 text-base font-semibold text-white shadow-lg shadow-[#25D366]/30 transition-all hover:scale-[1.02] hover:shadow-xl hover:shadow-[#25D366]/40 active:scale-[0.98]"
+                      aria-label="شروع گفتگو در واتساپ"
                     >
-                      <span className="text-2xl">📲</span>
+                      <WhatsAppIcon size={24} className="flex-shrink-0" />
                       <span>شروع گفتگو در واتساپ</span>
-                      <span className="transition-transform group-hover:translate-x-1">←</span>
+                      <span className="transition-transform group-hover:translate-x-1" aria-hidden>←</span>
                     </a>
                   </CardContent>
                 </Card>
