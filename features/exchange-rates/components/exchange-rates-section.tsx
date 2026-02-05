@@ -94,7 +94,7 @@ export function ExchangeRatesSection() {
                     </h3>
                     <p className="mb-6 text-sm text-gray-600 dark:text-gray-400">
                       خدمات سریع و مطمئن با بهترین نرخ‌ها
-                    </p> 
+                    </p>
                     <a
                       href={siteConfig.contact.whatsappLink}
                       target="_blank"
