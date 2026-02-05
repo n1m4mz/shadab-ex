@@ -1,36 +1,185 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# صرافی شاداب - Shadab Exchange
 
-## Getting Started
+یک وب‌سایت مدرن و حرفه‌ای برای نمایش نرخ‌های ارز صرافی شاداب در هامبورگ، آلمان.
 
-First, run the development server:
+## ویژگی‌ها
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- 🎨 UI/UX مدرن و تمیز در سطح SaaS های 2025-2026
+- 🏗️ معماری تمیز و قابل مقیاس‌پذیری
+- 📱 طراحی واکنش‌گرا (Mobile-First)
+- 🌍 پشتیبانی کامل از RTL برای زبان افغانی
+- ⚡ به‌روزرسانی خودکار نرخ‌ها هر 5 دقیقه
+- 📡 اتصال به کانال تلگرام برای دریافت داده‌ها
+- 🎭 انیمیشن‌های نرم با Framer Motion
+- ⚙️ تنظیمات مرکزی در `config/site.config.ts`
+
+## ساختار پروژه
+
+```
+shadab-ex/
+├── app/                    # Next.js App Router
+│   ├── api/               # API Routes
+│   ├── layout.tsx         # Root Layout
+│   └── page.tsx           # Home Page
+├── components/            # کامپوننت‌های قابل استفاده مجدد
+│   ├── ui/               # کامپوننت‌های UI پایه
+│   ├── motion/           # کامپوننت‌های انیمیشن
+│   └── layout/           # کامپوننت‌های Layout
+├── config/               # تنظیمات سایت
+│   └── site.config.ts    # تنظیمات مرکزی
+├── features/             # ویژگی‌های اصلی (Feature-based)
+│   └── exchange-rates/   # ویژگی نرخ‌های ارز
+├── hooks/                # Custom Hooks
+├── lib/                  # Utilities و Types
+├── services/             # سرویس‌های خارجی
+│   └── telegram.service.ts
+└── public/               # فایل‌های استاتیک
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## نصب و راه‌اندازی
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 1. نصب وابستگی‌ها
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install
+```
 
-## Learn More
+### 2. تنظیم متغیرهای محیطی
 
-To learn more about Next.js, take a look at the following resources:
+فایل `.env.local` را ایجاد کنید و مقادیر زیر را تنظیم کنید:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```env
+# گزینه 1: استفاده از Telegram Bot API (پیشنهادی)
+TELEGRAM_BOT_TOKEN=your_bot_token_here
+TELEGRAM_CHANNEL_ID=@your_channel_username
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# گزینه 2: استفاده از RSS Feed (در صورت موجود بودن)
+# TELEGRAM_RSS_URL=https://rss.app/feeds/your_channel_id.xml
 
-## Deploy on Vercel
+# گزینه 3: استفاده از API سفارشی
+# TELEGRAM_API_URL=https://api.example.com/telegram/channel
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 3. راه‌اندازی Telegram Bot
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+#### روش 1: استفاده از Telegram Bot API (پیشنهادی)
+
+1. با [@BotFather](https://t.me/botfather) در تلگرام صحبت کنید
+2. دستور `/newbot` را ارسال کنید و یک ربات جدید بسازید
+3. توکن ربات را دریافت کنید و در `.env.local` قرار دهید
+4. ربات را به کانال خود اضافه کنید و به آن دسترسی Admin بدهید
+5. نام کاربری کانال را در `.env.local` قرار دهید (مثلاً `@shadab_exchange_rates`)
+
+#### روش 2: استفاده از RSS Feed
+
+اگر کانال شما RSS Feed دارد، می‌توانید از آن استفاده کنید:
+
+```env
+TELEGRAM_RSS_URL=https://rss.app/feeds/your_channel_id.xml
+```
+
+#### روش 3: استفاده از API سفارشی
+
+اگر یک سرویس API سفارشی دارید که پیام‌های کانال را برمی‌گرداند:
+
+```env
+TELEGRAM_API_URL=https://api.example.com/telegram/channel
+```
+
+### 4. فرمت پیام در کانال تلگرام
+
+پیام‌های شما باید به این فرمت باشند:
+
+```
+صرافی شاداب 🇩🇪
+📅 تاریخ: یکشنبه 12 دلو ۱۴۰۴
+📆 مصادف: 01 February  2026
+
+🔻 نرخ امروز:
+
+1️⃣ 1 Euro = 75,50   🇦🇫 افغانی
+2️⃣ 1 Euro = 1,1490  🇺🇸 دالر
+3️⃣ 1 Euro = 179,000 🇮🇷 تومان
+4️⃣ 1 Euro = 50,80 🇹🇷 لیر ترکیه
+
+✅ خدمات سریع و مطمئن در تبدیل ارز و ارسال حواله
+📲 واتساپ: ‎+93 79 911 0081
+
+صرافی شاداب، پلی اعتماد میان شما و جهان 🌍
+```
+
+### 5. اجرای پروژه
+
+```bash
+# حالت توسعه
+npm run dev
+
+# ساخت برای تولید
+npm run build
+
+# اجرای نسخه تولید
+npm start
+```
+
+## تنظیمات سایت
+
+تمام اطلاعات مهم سایت در فایل `config/site.config.ts` قرار دارد و به راحتی قابل تغییر است:
+
+- اطلاعات کسب‌وکار (نام، مکان، تگ‌لاین)
+- اطلاعات تماس (واتساپ، تلگرام)
+- خدمات
+- تنظیمات UI و رنگ‌ها
+- تنظیمات SEO
+
+## معماری و بهترین روش‌ها
+
+- ✅ **Feature-based Structure**: هر ویژگی در پوشه خودش
+- ✅ **Separation of Concerns**: جداسازی UI، Logic و Data Fetching
+- ✅ **TypeScript Strict**: تمام کدها به صورت Type-safe
+- ✅ **Reusable Components**: کامپوننت‌های قابل استفاده مجدد
+- ✅ **Custom Hooks**: منطق در Hook‌ها
+- ✅ **Service Layer**: اتصالات خارجی در Service‌ها
+- ✅ **RTL Support**: پشتیبانی کامل از راست‌چین
+
+## تکنولوژی‌های استفاده شده
+
+- **Next.js 16** - Framework اصلی
+- **React 19** - کتابخانه UI
+- **TypeScript** - Type Safety
+- **Tailwind CSS** - Styling
+- **Framer Motion** - انیمیشن‌ها
+- **SWR** - Data Fetching و Caching
+- **Zustand** - State Management (در صورت نیاز)
+
+## توسعه بیشتر
+
+### اضافه کردن ارز جدید
+
+برای اضافه کردن ارز جدید، فلگ آن را در `services/telegram.service.ts` در تابع `getCurrencyCode` اضافه کنید:
+
+```typescript
+const flagMap: Record<string, string> = {
+  "🇦🇫": "AFN",
+  "🇺🇸": "USD",
+  // ارز جدید را اینجا اضافه کنید
+  "🇬🇧": "GBP",
+};
+```
+
+### تغییر فاصله به‌روزرسانی
+
+در `config/site.config.ts`:
+
+```typescript
+telegram: {
+  updateInterval: 5 * 60 * 1000, // تغییر به میلی‌ثانیه مورد نظر
+}
+```
+
+## پشتیبانی
+
+برای سوالات و پشتیبانی، با ما تماس بگیرید.
+
+---
+
+ساخته شده با ❤️ برای صرافی شاداب
